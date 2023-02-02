@@ -18,6 +18,7 @@ import HomeDashboard from './HomeDashboard'
 import ProductsList from './Dashboard/ProductsList'
 import NewProduct from './Dashboard/NewProduct'
 import UpdateProduct from './Dashboard/UpdateProduct'
+import OrdersList from './Dashboard/OrdersList'
 export {
   Home,
   ProductDetails,

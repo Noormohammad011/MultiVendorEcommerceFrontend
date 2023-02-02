@@ -27,6 +27,7 @@ import {
 import RequiredAuth from '../protectedRoute/RequiredAuth'
 import Dashboard from '../layout/Dashboard'
 import AdminRequiredAuth from '../protectedRoute/AdminRequiredAuth'
+import OrdersList from '../pages/Dashboard/OrdersList'
 const stripeApiKey = `${import.meta.env.VITE_STRIPE_API_KEY}`
 
 const routes = createBrowserRouter([
@@ -179,6 +180,14 @@ const routes = createBrowserRouter([
             element: (
               <AdminRequiredAuth>
                 <UpdateProduct />
+              </AdminRequiredAuth>
+            ),
+          },
+          {
+            path: '/dashboard/admin/orders',
+            element: (
+              <AdminRequiredAuth>
+                <OrdersList />
               </AdminRequiredAuth>
             ),
           },

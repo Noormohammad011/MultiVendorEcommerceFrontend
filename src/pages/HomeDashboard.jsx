@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { getAlllProducts } from '../features/product/productSlice'
 import { useAlert } from 'react-alert'
+import { getOrders } from '../features/order/orderSlice'
 
 const HomeDashboard = () => {
   const alert = useAlert()
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.product
   )
+  const { orders, totalAmount } = useSelector((state) => state.order)
+ 
   let outOfStock = 0
   products.forEach((product) => {
     if (product.stock === 0) {
@@ -22,6 +25,8 @@ const HomeDashboard = () => {
     if (isError) {
       alert.error(message)
     }
+
+    dispatch(getOrders())
 
     dispatch(getAlllProducts())
   }, [isError, message, dispatch])
@@ -39,7 +44,7 @@ const HomeDashboard = () => {
                 <div className='card-body'>
                   <div className='text-center card-font-size'>
                     Total Amount
-                    {/* <br /> <b>${totalAmount && totalAmount.toFixed(2)}</b> */}
+                    <br /> <b>${totalAmount && totalAmount.toFixed(2)}</b>
                   </div>
                 </div>
               </div>
@@ -57,7 +62,7 @@ const HomeDashboard = () => {
                 </div>
                 <Link
                   className='card-footer text-white clearfix small z-1'
-                  to='/admin/products'
+                  to='/dashboard/admin/products'
                 >
                   <span className='float-left'>View Details</span>
                   <span className='float-right'>
@@ -72,12 +77,12 @@ const HomeDashboard = () => {
                 <div className='card-body'>
                   <div className='text-center card-font-size'>
                     Orders
-                    {/* <br /> <b>{orders && orders.length}</b> */}
+                    <br /> <b>{orders && orders.length}</b>
                   </div>
                 </div>
                 <Link
                   className='card-footer text-white clearfix small z-1'
-                  to='/admin/orders'
+                  to='/dashboard/admin/orders'
                 >
                   <span className='float-left'>View Details</span>
                   <span className='float-right'>
@@ -97,7 +102,7 @@ const HomeDashboard = () => {
                 </div>
                 <Link
                   className='card-footer text-white clearfix small z-1'
-                  to='/admin/users'
+                  to='/dashboard/admin/users'
                 >
                   <span className='float-left'>View Details</span>
                   <span className='float-right'>

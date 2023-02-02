@@ -44,7 +44,6 @@ export const getOrders = createAsyncThunk(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/orders/`,
         config
       )
-      console.log(data)
       return data
     } catch (error) {
       const message =
@@ -116,16 +115,19 @@ const orderSlice = createSlice({
   name: 'order',
   initialState: {
     order: {},
+    orders: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
     message: '',
+    totalAmount: 0
   },
   reducers: {
     resetOrder: (state) => {
       state.order = {}
       state.isError = false
       state.isSuccess = false
+      state.isDelete = false
       state.isLoading = false
       state.message = ''
     },
@@ -151,7 +153,8 @@ const orderSlice = createSlice({
       .addCase(getOrders.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.order = action.payload
+        state.orders = action.payload.data
+        state.totalAmount = action.payload.totalAmount
       })
       .addCase(getOrders.rejected, (state, action) => {
         state.isLoading = false
@@ -176,7 +179,7 @@ const orderSlice = createSlice({
       })
       .addCase(deleteOrder.fulfilled, (state, action) => {
         state.isLoading = false
-        state.isSuccess = true
+        state.isDelete = true
         state.order = action.payload
       })
       .addCase(deleteOrder.rejected, (state, action) => {

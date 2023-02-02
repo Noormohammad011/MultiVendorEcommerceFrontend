@@ -37,7 +37,7 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to='/admin/orders'>
+            <Link to='/dashboard/admin/orders'>
               <i className='fa fa-shopping-basket'></i> Orders
             </Link>
           </li>
