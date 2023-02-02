@@ -2,10 +2,12 @@ import React, { useEffect } from 'react'
 import { Loader, MetaData } from '../components'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOrders } from '../features/order/orderSlice'
+
 import { getAlllProducts } from '../features/product/productSlice'
+import { useAlert } from 'react-alert'
 
 const HomeDashboard = () => {
+  const alert = useAlert()
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.product
   )

@@ -46,11 +46,65 @@ export const createProduct = createAsyncThunk(
         headers: {
           'Content-type': 'multipart/form-data',
           Authorization: `Bearer ${getCookie('token')}`,
-
         },
       }
       const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/products`,
+        product,
+        config
+      )
+      return data
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const deleteProduct = createAsyncThunk(
+  'product/deleteProduct',
+  async (id, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getCookie('token')}`,
+        },
+      }
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/products/${id}`,
+        config
+      )
+      return data
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const updateProduct = createAsyncThunk(
+  'product/updateProduct',
+  async (product, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getCookie('token')}`,
+        },
+      }
+      const { data } = await axios.update(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/products/${id}`,
         product,
         config
       )
@@ -104,6 +158,32 @@ const productSlice = createSlice({
         state.product = action.payload
       })
       .addCase(createProduct.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(deleteProduct.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.message = action.payload.message
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(updateProduct.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.product = action.payload
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
