@@ -1,0 +1,114 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { getCookie } from '../../utils'
+
+const initialState = {
+  products: [],
+  product: {},
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: '',
+}
+
+export const getAlllProducts = createAsyncThunk(
+  'product/getAlllProducts',
+  async (_, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getCookie('token')}`,
+        },
+      }
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/products/adminProducts`,
+        config
+      )
+      return data.products
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const createProduct = createAsyncThunk(
+  'product/createProduct',
+  async (product, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          Authorization: `Bearer ${getCookie('token')}`,
+
+        },
+      }
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/products`,
+        product,
+        config
+      )
+      return data
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+const productSlice = createSlice({
+  name: 'admin/products',
+  initialState: {
+    products: [],
+    product: {},
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+    message: '',
+  },
+  reducers: {
+    clearProducts: (state) => initialState,
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAlllProducts.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getAlllProducts.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.products = action.payload
+      })
+      .addCase(getAlllProducts.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(createProduct.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.product = action.payload
+      })
+      .addCase(createProduct.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+  },
+})
+export const { clearProducts } = productSlice.actions
+export default productSlice.reducer
