@@ -60,7 +60,7 @@ const ProductsList = () => {
         actions: (
           <>
             <Link
-              to={`/admin/product/${product._id}`}
+              to={`/dashboard/admin/product/${product._id}`}
               className='btn btn-primary py-1 px-2'
             >
               <i className='fa fa-pencil'></i>

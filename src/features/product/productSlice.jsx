@@ -38,6 +38,26 @@ export const getAlllProducts = createAsyncThunk(
   }
 )
 
+export const getProductDetails = createAsyncThunk(
+  'product/getProductDetails',
+  async (id, thunkAPI) => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/products/${id}`
+      )
+      return data.data.data
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const createProduct = createAsyncThunk(
   'product/createProduct',
   async (product, thunkAPI) => {
@@ -99,11 +119,12 @@ export const updateProduct = createAsyncThunk(
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${getCookie('token')}`,
         },
       }
-      const { data } = await axios.update(
+      const id = product.get('id')
+      const { data } = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/products/${id}`,
         product,
         config
@@ -130,6 +151,7 @@ const productSlice = createSlice({
     isSuccess: false,
     isLoading: false,
     message: '',
+    isUpdateSuccess: false
   },
   reducers: {
     clearProducts: (state) => initialState,
@@ -180,10 +202,23 @@ const productSlice = createSlice({
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.isLoading = false
-        state.isSuccess = true
+        state.isUpdateSuccess = true
         state.product = action.payload
       })
       .addCase(updateProduct.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(getProductDetails.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getProductDetails.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.product = action.payload
+      })
+      .addCase(getProductDetails.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

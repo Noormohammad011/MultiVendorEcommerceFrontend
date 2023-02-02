@@ -17,6 +17,7 @@ import OrderDetails from './Order/OrderDetails'
 import HomeDashboard from './HomeDashboard'
 import ProductsList from './Dashboard/ProductsList'
 import NewProduct from './Dashboard/NewProduct'
+import UpdateProduct from './Dashboard/UpdateProduct'
 export {
   Home,
   ProductDetails,
@@ -37,4 +38,5 @@ export {
   HomeDashboard,
   ProductsList,
   NewProduct,
+  UpdateProduct,
 }

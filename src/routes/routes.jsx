@@ -22,6 +22,7 @@ import {
   HomeDashboard,
   ProductsList,
   NewProduct,
+  UpdateProduct,
 } from '../pages'
 import RequiredAuth from '../protectedRoute/RequiredAuth'
 import Dashboard from '../layout/Dashboard'
@@ -170,6 +171,14 @@ const routes = createBrowserRouter([
             element: (
               <AdminRequiredAuth>
                 <NewProduct />
+              </AdminRequiredAuth>
+            ),
+          },
+          {
+            path: '/dashboard/admin/product/:id',
+            element: (
+              <AdminRequiredAuth>
+                <UpdateProduct />
               </AdminRequiredAuth>
             ),
           },
