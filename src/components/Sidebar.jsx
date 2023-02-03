@@ -43,7 +43,7 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to='/admin/users'>
+            <Link to='/dashboard/admin/users'>
               <i className='fa fa-users'></i> Users
             </Link>
           </li>

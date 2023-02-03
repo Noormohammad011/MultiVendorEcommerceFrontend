@@ -5,6 +5,7 @@ import cartSlice from '../features/cart/cartSlice'
 import reviewSlice from '../features/reviews/reviewsSlice'
 import orderSlice from '../features/order/orderSlice'
 import productSlice from '../features/product/productSlice'
+import adminUserSlice from '../features/adminUser/adminUserSlice'
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
@@ -35,6 +36,7 @@ export const store = configureStore({
     reviews: reviewSlice,
     order: orderSlice,
     product: productSlice,
+    adminUser: adminUserSlice,
   },
   preloadedState: initialState,
   middleware: (getDefaultMiddlewares) =>

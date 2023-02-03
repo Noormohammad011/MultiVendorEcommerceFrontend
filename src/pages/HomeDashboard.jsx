@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAlllProducts } from '../features/product/productSlice'
 import { useAlert } from 'react-alert'
 import { getOrders } from '../features/order/orderSlice'
+import { fetchAllUser } from '../features/adminUser/adminUserSlice'
 
 const HomeDashboard = () => {
   const alert = useAlert()
@@ -13,7 +14,9 @@ const HomeDashboard = () => {
     (state) => state.product
   )
   const { orders, totalAmount } = useSelector((state) => state.order)
- 
+   const { users } = useSelector(
+     (state) => state.adminUser
+   )
   let outOfStock = 0
   products.forEach((product) => {
     if (product.stock === 0) {
@@ -27,7 +30,7 @@ const HomeDashboard = () => {
     }
 
     dispatch(getOrders())
-
+    dispatch(fetchAllUser())
     dispatch(getAlllProducts())
   }, [isError, message, dispatch])
   return (
@@ -97,7 +100,7 @@ const HomeDashboard = () => {
                 <div className='card-body'>
                   <div className='text-center card-font-size'>
                     Users
-                    {/* <br /> <b>{users && users.length}</b> */}
+                    <br /> <b>{users && users.length}</b>
                   </div>
                 </div>
                 <Link

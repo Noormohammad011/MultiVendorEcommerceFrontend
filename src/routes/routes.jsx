@@ -25,6 +25,8 @@ import {
   UpdateProduct,
   OrdersList,
   ProcessOrder,
+  UsersList,
+  UpdateUser,
 } from '../pages'
 import RequiredAuth from '../protectedRoute/RequiredAuth'
 import Dashboard from '../layout/Dashboard'
@@ -197,6 +199,22 @@ const routes = createBrowserRouter([
             element: (
               <AdminRequiredAuth>
                 <ProcessOrder />
+              </AdminRequiredAuth>
+            ),
+          },
+          {
+            path: '/dashboard/admin/users',
+            element: (
+              <AdminRequiredAuth>
+                <UsersList />
+              </AdminRequiredAuth>
+            ),
+          },
+          {
+            path: '/dashboard/admin/user/:id',
+            element: (
+              <AdminRequiredAuth>
+                <UpdateUser />
               </AdminRequiredAuth>
             ),
           },
