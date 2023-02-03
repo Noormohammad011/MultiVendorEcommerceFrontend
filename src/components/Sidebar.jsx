@@ -49,7 +49,7 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to='/admin/reviews'>
+            <Link to='/dashboard/admin/reviews'>
               <i className='fa fa-star'></i> Reviews
             </Link>
           </li>

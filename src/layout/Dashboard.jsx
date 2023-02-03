@@ -2,6 +2,7 @@ import React from 'react'
 import { Sidebar } from '../components'
 import { Outlet } from 'react-router-dom'
 const Dashboard = () => {
+
   return (
     <>
       <div className='row'>

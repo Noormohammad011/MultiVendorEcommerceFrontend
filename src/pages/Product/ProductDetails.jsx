@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useGetProductQuery } from '../../features/product/productApi'
 import { ListReviews, Loader, MetaData } from '../../components'
 import { useAlert } from 'react-alert'

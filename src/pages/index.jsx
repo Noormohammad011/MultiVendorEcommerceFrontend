@@ -22,6 +22,7 @@ import OrdersList from './Dashboard/OrdersList'
 import ProcessOrder from './Dashboard/ProcessOrder'
 import UsersList from './admin/UsersList'
 import UpdateUser from './admin/UpdateUser'
+import ProductReviews from './Dashboard/ProductReviews'
 export {
   Home,
   ProductDetails,
@@ -47,4 +48,5 @@ export {
   ProcessOrder,
   UsersList,
   UpdateUser,
+  ProductReviews,
 }
