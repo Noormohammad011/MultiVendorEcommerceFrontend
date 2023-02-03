@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProductQuery } from '../../features/product/productApi'
 import { ListReviews, Loader, MetaData } from '../../components'
 import { useAlert } from 'react-alert'
@@ -17,6 +17,7 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
+
 
   const { user } = useSelector((state) => state.auth)
   const {
@@ -95,12 +96,13 @@ const ProductDetails = () => {
     return <Loader />
   }
 
+
   return (
     <>
       {isLoading ? (
         <Loader />
       ) : isError ? (
-        alert.error(error)
+        alert.error(error?.data?.error)
       ) : (
         <>
           <MetaData title={product?.data?.data?.name} />

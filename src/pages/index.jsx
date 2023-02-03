@@ -19,6 +19,7 @@ import ProductsList from './Dashboard/ProductsList'
 import NewProduct from './Dashboard/NewProduct'
 import UpdateProduct from './Dashboard/UpdateProduct'
 import OrdersList from './Dashboard/OrdersList'
+import ProcessOrder from './Dashboard/ProcessOrder'
 export {
   Home,
   ProductDetails,
@@ -40,4 +41,6 @@ export {
   ProductsList,
   NewProduct,
   UpdateProduct,
+  OrdersList,
+  ProcessOrder,
 }

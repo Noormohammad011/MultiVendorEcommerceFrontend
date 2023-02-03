@@ -71,7 +71,7 @@ export const getOrder = createAsyncThunk(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/orders/${id}`,
         config
       )
-      return data.data
+      return data?.data?.data
     } catch (error) {
       const message =
         (error.response &&
@@ -111,6 +111,35 @@ export const deleteOrder = createAsyncThunk(
   }
 )
 
+export const updateOrder = createAsyncThunk(
+  'order/updateOrder',
+  async (order, thunkAPI) => {
+    try {
+      const id = order.get('id')
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getCookie('token')}`,
+        },
+      }
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/orders/${id}`,
+        order,
+        config
+      )
+      return data.data
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 const orderSlice = createSlice({
   name: 'order',
   initialState: {
@@ -120,7 +149,9 @@ const orderSlice = createSlice({
     isSuccess: false,
     isLoading: false,
     message: '',
-    totalAmount: 0
+    totalAmount: 0,
+    isUpdated: false,
+    isDelete: false,
   },
   reducers: {
     resetOrder: (state) => {
@@ -183,6 +214,19 @@ const orderSlice = createSlice({
         state.order = action.payload
       })
       .addCase(deleteOrder.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(updateOrder.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateOrder.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isUpdated = true
+        state.order = action.payload
+      })
+      .addCase(updateOrder.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

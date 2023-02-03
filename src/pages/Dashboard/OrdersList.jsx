@@ -2,7 +2,11 @@ import React, { useEffect } from 'react'
 import { Loader, MetaData } from '../../components'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteOrder, getOrders } from '../../features/order/orderSlice'
+import {
+  deleteOrder,
+  getOrders,
+  resetOrder,
+} from '../../features/order/orderSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import { MDBDataTable } from 'mdbreact'
 const OrdersList = () => {
@@ -14,15 +18,17 @@ const OrdersList = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    dispatch(getOrders())
     if (isError) {
       alert.error(message)
     }
-    // if (isDelete) {
-    //   alert.success('Order deleted successfully')
-    //   navigate('/dashboard/admin/orders')
-    // }
-    dispatch(getOrders())
-  }, [dispatch, isError, isDelete, navigate])
+    if (isDelete) {
+      alert.success('Order deleted successfully')
+    }
+    return () => {
+      dispatch(resetOrder())
+    }
+  }, [dispatch, isError, isDelete, navigate, isDelete])
 
   const setOrders = () => {
     const data = {
