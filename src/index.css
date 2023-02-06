@@ -294,10 +294,10 @@ footer {
 /* Login & Register */
 
 .wrapper {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5rem;
+  margin-top: 5rem; */
 
   font-weight: 700;
 }
@@ -613,4 +613,26 @@ ul.CTAs a {
 .review_user {
   font-size: 0.8rem;
   color: grey;
+}
+
+.css-dip3t8 {
+    background-color: #18212b !important;
+}
+
+.css-16jesut >.ps-menu-button:hover {
+    background-color: #242222 !important;
+}
+
+
+.css-16jkw2k >.ps-menu-button:hover {
+    background-color:#242222 !important;
+}
+
+.css-vj11vy.ps-menu-root {
+    background-color: #19202a !important;
+    padding: 1rem 1rem;
+}
+
+.css-12vkui9 >.ps-menu-button:hover {
+    background-color: #9e1515 !important;
 }

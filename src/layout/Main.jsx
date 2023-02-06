@@ -14,7 +14,7 @@ const Main = () => {
       >
         <Outlet />
       </div>
-      <Footer />
+      {pathname.startsWith('/dashboard') ? '' : <Footer />}
     </>
   )
 }

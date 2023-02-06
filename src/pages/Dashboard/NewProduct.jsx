@@ -122,7 +122,7 @@ const NewProduct = () => {
                 <textarea
                   className='form-control'
                   id='description_field'
-                  rows='8'
+                  rows='3'
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>

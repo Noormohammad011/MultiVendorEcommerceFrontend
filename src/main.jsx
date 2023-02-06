@@ -12,10 +12,14 @@ const options = {
   transition: transitions.SCALE,
 }
 
+import { ProSidebarProvider } from 'react-pro-sidebar'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>
-      <App />
+      <ProSidebarProvider>
+        <App />
+      </ProSidebarProvider>
     </AlertProvider>
   </Provider>
 )

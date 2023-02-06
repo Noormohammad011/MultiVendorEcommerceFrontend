@@ -6,6 +6,7 @@ import Loader from './Loader'
 import Product from './Product'
 import ListReviews from './ListReviews'
 import Sidebar from './Sidebar'
+import DashbordSidebar from './DashbordSidebar'
 export {
   Footer,
   Navbar,
@@ -15,4 +16,5 @@ export {
   Product,
   ListReviews,
   Sidebar,
+  DashbordSidebar,
 }
