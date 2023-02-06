@@ -45,18 +45,24 @@ const UpdateProduct = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (product && product._id !== id) {
-      dispatch(getProductDetails(id))
+    if (isUpdateSuccess) {
+      alert.success('Product Updated Successfully')
+      dispatch(clearProducts())
+      navigate('/dashboard/admin/products')
     } else {
-      setName(product.name)
-      setPrice(product.price)
-      setDescription(product.description)
-      setCategory(product.category)
-      setSeller(product.seller)
-      setStock(product.stock)
-      setOldImages(product.images)
+      if (product && product._id !== id) {
+        dispatch(getProductDetails(id))
+      } else {
+        setName(product.name)
+        setPrice(product.price)
+        setDescription(product.description)
+        setCategory(product.category)
+        setSeller(product.seller)
+        setStock(product.stock)
+        setOldImages(product.images)
+      }
     }
-  }, [dispatch, product, id])
+  }, [dispatch, product, id, isUpdateSuccess])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -92,11 +98,11 @@ const UpdateProduct = () => {
   if (isLoading) {
     return <Loader />
   }
-  if (isUpdateSuccess) {
-    dispatch(clearProducts())
-    alert.success('Product updated successfully')
-    navigate('/dashboard/admin/products')
-  }
+  // if (isUpdateSuccess) {
+  //   dispatch(clearProducts())
+  //   alert.success('Product updated successfully')
+  //   navigate('/dashboard/admin/products')
+  // }
   return (
     <div>
       <MetaData title={'Update Product'} />
@@ -151,8 +157,8 @@ const UpdateProduct = () => {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
+                  {categories?.map((category, index) => (
+                    <option key={index} value={category}>
                       {category}
                     </option>
                   ))}
@@ -198,9 +204,9 @@ const UpdateProduct = () => {
                 </div>
 
                 {oldImages &&
-                  oldImages.map((img) => (
+                  oldImages.map((img, index) => (
                     <img
-                      key={img}
+                      key={index}
                       src={img.url}
                       alt={img.url}
                       className='mt-3 mr-2'
@@ -209,10 +215,10 @@ const UpdateProduct = () => {
                     />
                   ))}
 
-                {imagesPreview.map((img) => (
+                {imagesPreview.map((img,index) => (
                   <img
                     src={img}
-                    key={img}
+                    key={index}
                     alt='Images Preview'
                     className='mt-3 mr-2'
                     width='55'
