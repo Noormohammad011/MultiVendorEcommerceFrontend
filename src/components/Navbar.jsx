@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from '../assets/images/logo.png'
 import { useNavigate } from 'react-router-dom'
 import Search from './Search'
-import { signout } from '../utils'
+import { isAuthenticated, signout } from '../utils'
 import { useLoadUserQuery } from '../features/auth/authApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLoggedOut } from '../features/auth/authSlice'
@@ -19,7 +19,7 @@ const Navbar = () => {
   const { data: userData, isLoading } = useLoadUserQuery()
   const { cartItems } = useSelector((state) => state.cart)
   const auth = useSelector((state) => state.auth)
-  const user = auth.user
+  const user = auth.user || isAuthenticated()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const logoutHandler = (e) => {
