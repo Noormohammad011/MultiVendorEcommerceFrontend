@@ -25,7 +25,7 @@ const Shipping = () => {
       <MetaData title={'Shipping Info'} />
       <CheckoutSteps shipping />
       <div className='row wrapper'>
-        <div className='col-10 col-lg-5'>
+        <div className='col-10 col-lg-5 mx-auto my-5'>
           <form className='shadow-lg' onSubmit={submitHandler}>
             <h1 className='mb-4'>Shipping Info</h1>
             <div className='form-group'>
