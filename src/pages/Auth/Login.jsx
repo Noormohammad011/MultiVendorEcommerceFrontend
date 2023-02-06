@@ -36,17 +36,19 @@ const Login = () => {
         alert.success('loggedin success')
       }
     }
-  }, [user, navigate])
+    if (isError) {
+      alert.error('Invalid credentials')
+    }
+  }, [user, navigate, isError])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     login({ email, password })
     resetForm()
   }
-  if (isError) {
-    alert.error(error.data.error || 'loggedin fail')
-  }
-  
+  // if (isError) {
+  //    return alert.error('loggedin fail')
+  // }
 
   return (
     <>
