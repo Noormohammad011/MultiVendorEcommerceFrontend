@@ -41,7 +41,7 @@ const Navbar = () => {
             <Nav className='ml-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>
-                  <i className='fas fa-shopping-cart' aria-hidden='true'></i>
+                  <i className='fa-solid fa-cart-shopping'></i>
                   Cart {cartItems.length}
                 </Nav.Link>
               </LinkContainer>
@@ -91,7 +91,7 @@ const Navbar = () => {
                 !isLoading && (
                   <LinkContainer to='/login'>
                     <Nav.Link>
-                      <i className='fas fa-user' aria-hidden='true'></i> Login
+                      <i className='fa-light fa-user'></i>Login
                     </Nav.Link>
                   </LinkContainer>
                 )
