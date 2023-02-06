@@ -36,7 +36,7 @@ const NewPassword = () => {
         <Loader />
       ) : (
         <div className='row wrapper'>
-          <div className='col-10 col-lg-5'>
+          <div className='col-10 col-lg-5 mx-auto my-5'>
             <form className='shadow-lg' onSubmit={submitHandler}>
               <h1 className='mb-3'>New Password</h1>
 

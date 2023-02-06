@@ -57,7 +57,7 @@ const UpdateProfile = () => {
       <MetaData title={'Update Profile'} />
 
       <div className='row wrapper'>
-        <div className='col-10 col-lg-5'>
+        <div className='col-10 col-lg-5 mx-auto my-5'>
           <form
             className='shadow-lg'
             onSubmit={submitHandler}
