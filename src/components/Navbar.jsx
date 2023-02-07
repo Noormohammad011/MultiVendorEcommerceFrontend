@@ -45,7 +45,7 @@ const Navbar = () => {
                     Cart
                   </span>
                   <span className='ml-1' id='cart_count'>
-                    {(user && cartItems.length) || 0}
+                    {cartItems.length}
                   </span>
                 </Nav.Link>
               </LinkContainer>
