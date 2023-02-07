@@ -7,7 +7,6 @@ const DashbordSidebar = () => {
       transitionDuration={1000}
       rootStyles={{
         color: 'white',
-        // marginTop: '84px',
         border: 'none',
         backgroundColor: '#18212b !important',
       }}

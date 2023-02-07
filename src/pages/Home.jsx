@@ -56,7 +56,7 @@ const Home = () => {
           <div className='row'>
             {keyword ? (
               <>
-                <div className='col-6 col-md-3 mt-5 mb-5'>
+                <div className='col-12 col-md-3 mt-5 mb-5'>
                   <div className='px-5'>
                     <Range
                       marks={{
@@ -121,7 +121,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className='col-6 col-md-9'>
+                <div className='col-12 col-md-9'>
                   <div className='row'>
                     {products?.data?.map((product) => (
                       <Product key={product._id} product={product} col={5} />
