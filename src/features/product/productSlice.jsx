@@ -129,7 +129,7 @@ export const updateProduct = createAsyncThunk(
         product,
         config
       )
-      return data
+      return data.product
     } catch (error) {
       const message =
         (error.response &&
