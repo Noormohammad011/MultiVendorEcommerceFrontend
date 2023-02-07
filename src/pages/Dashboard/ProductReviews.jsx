@@ -125,6 +125,7 @@ const ProductReviews = () => {
 
           {reviews && reviews.length > 0 ? (
             <MDBDataTable
+              responsive
               data={setReviews()}
               className='px-3'
               bordered

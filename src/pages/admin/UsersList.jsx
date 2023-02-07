@@ -100,6 +100,7 @@ const UsersList = () => {
             <Loader />
           ) : (
             <MDBDataTable
+              responsive
               data={setUsers()}
               className='px-3'
               bordered

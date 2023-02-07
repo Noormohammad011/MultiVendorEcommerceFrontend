@@ -90,6 +90,7 @@ const ProductsList = () => {
             <Loader />
           ) : (
             <MDBDataTable
+              responsive
               data={setProducts()}
               className='px-3'
               bordered
