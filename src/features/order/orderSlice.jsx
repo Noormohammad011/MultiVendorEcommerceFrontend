@@ -161,6 +161,7 @@ const orderSlice = createSlice({
       state.isDelete = false
       state.isLoading = false
       state.message = ''
+      state.isUpdated = false
     },
   },
   extraReducers: (builder) => {

@@ -98,11 +98,7 @@ const UpdateProduct = () => {
   if (isLoading) {
     return <Loader />
   }
-  // if (isUpdateSuccess) {
-  //   dispatch(clearProducts())
-  //   alert.success('Product updated successfully')
-  //   navigate('/dashboard/admin/products')
-  // }
+ 
   return (
     <div>
       <MetaData title={'Update Product'} />

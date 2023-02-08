@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import { Loader, MetaData } from '../../components'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   getOrder,
   resetOrder,
@@ -11,6 +11,7 @@ import {
 
 const ProcessOrder = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [status, setStatus] = useState('')
   const { order, isLoading, isError, message, isUpdated } = useSelector(
     (state) => state.order
@@ -27,17 +28,21 @@ const ProcessOrder = () => {
   const alert = useAlert()
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getOrder(id))
     if (isError) {
       alert.error(message)
     }
     if (isUpdated) {
       alert.success('Order updated successfully')
-    }
-    return () => {
       dispatch(resetOrder())
+      navigate('/dashboard/admin/orders')
+    } else {
+      if (order && order._id !== id) {
+        dispatch(getOrder(id))
+      } else {
+        setStatus(order.orderStatus)
+      }
     }
-  }, [dispatch, id, isUpdated, message, isError])
+  }, [dispatch, isError, isUpdated, navigate, order._id , id])
 
   const shippingDetails =
     shippingInfo &&
