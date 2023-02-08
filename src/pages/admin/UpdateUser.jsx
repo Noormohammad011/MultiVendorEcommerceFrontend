@@ -22,6 +22,9 @@ const UpdateUser = () => {
   )
 
   useEffect(() => {
+    if (isError) {
+      alert.error(message)
+    }
     if (user && user._id !== id) {
       dispatch(fetchUser(id))
     } else {
@@ -29,9 +32,7 @@ const UpdateUser = () => {
       setEmail(user.email)
       setRole(user.role)
     }
-    if (isError) {
-      alert.error(message)
-    }
+
     if (isUpdate) {
       alert.success('User updated successfully')
       dispatch(clearUsers())
@@ -50,7 +51,7 @@ const UpdateUser = () => {
       <MetaData title={`Update User`} />
       <div className='col-12 col-md-10'>
         <div className='row wrapper'>
-          <div className='col-10 col-lg-5'>
+          <div className='col-10 col-lg-6 mx-auto'>
             <form className='shadow-lg' onSubmit={submitHandler}>
               <h1 className='mt-2 mb-5'>Update User</h1>
 
